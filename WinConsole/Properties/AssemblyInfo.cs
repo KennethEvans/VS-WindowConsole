@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WinConsole")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Window Console")]
+[assembly: AssemblyDescription("If this program works, it was written by Kenneth Evans.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WinConsole")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCompany("kenevans.net")]
+[assembly: AssemblyProduct("Window Console")]
+[assembly: AssemblyCopyright("Copyright © Kenneth Evans 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -2,10 +2,13 @@
     using System.Timers;
 
 namespace WinConsole.Misc {
-    class Test {
-        public static readonly string NL = Environment.NewLine;
+    class Test : Runnable {
 
-        public void run() {
+        void OnTimerElapsed(object sender, ElapsedEventArgs e) {
+            Console.WriteLine("Test: Finished at " + DateTime.Now);
+        }
+
+        public override void Main(string[] args) {
             Console.WriteLine("Test: Run at " + DateTime.Now);
 
             // Want it to pause a while
@@ -14,10 +17,6 @@ namespace WinConsole.Misc {
             timer.AutoReset = false; // Stops it from repeating
             timer.Elapsed += new ElapsedEventHandler(OnTimerElapsed);
             timer.Start();
-        }
-
-        void OnTimerElapsed(object sender, ElapsedEventArgs e) {
-            Console.WriteLine("Test: Finished at " + DateTime.Now);
         }
     }
 }

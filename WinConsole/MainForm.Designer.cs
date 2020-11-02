@@ -26,7 +26,6 @@
             this.tableLayoutPanelTop = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox = new System.Windows.Forms.TextBox();
             this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
@@ -34,6 +33,12 @@
             this.buttonQuit = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
+            this.runPreviousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runMRUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runConfigurationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanelTop.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.flowLayoutPanelButtons.SuspendLayout();
@@ -60,30 +65,28 @@
             // 
             // menuStrip
             // 
+            this.menuStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.runToolStripMenuItem});
+            this.runToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1355, 60);
+            this.menuStrip.Size = new System.Drawing.Size(1355, 52);
             this.menuStrip.TabIndex = 2;
             this.menuStrip.Text = "menuStrip1";
             // 
             // runToolStripMenuItem
             // 
             this.runToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.runToolStripMenuItem1,
+            this.runPreviousToolStripMenuItem,
+            this.runMRUToolStripMenuItem,
+            this.runConfigurationsToolStripMenuItem,
+            this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(87, 45);
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(87, 56);
             this.runToolStripMenuItem.Text = "File";
-            // 
-            // runToolStripMenuItem1
-            // 
-            this.runToolStripMenuItem1.Name = "runToolStripMenuItem1";
-            this.runToolStripMenuItem1.Size = new System.Drawing.Size(236, 54);
-            this.runToolStripMenuItem1.Text = "Run";
-            this.runToolStripMenuItem1.Click += new System.EventHandler(this.OnRunClick);
             // 
             // exitToolStripMenuItem
             // 
@@ -95,11 +98,11 @@
             // textBox
             // 
             this.textBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox.Location = new System.Drawing.Point(3, 63);
+            this.textBox.Location = new System.Drawing.Point(3, 55);
             this.textBox.Multiline = true;
             this.textBox.Name = "textBox";
             this.textBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox.Size = new System.Drawing.Size(1349, 716);
+            this.textBox.Size = new System.Drawing.Size(1349, 724);
             this.textBox.TabIndex = 0;
             // 
             // flowLayoutPanelButtons
@@ -175,6 +178,47 @@
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.OnStartClick);
             // 
+            // runPreviousToolStripMenuItem
+            // 
+            this.runPreviousToolStripMenuItem.Name = "runPreviousToolStripMenuItem";
+            this.runPreviousToolStripMenuItem.Size = new System.Drawing.Size(460, 54);
+            this.runPreviousToolStripMenuItem.Text = "Run Previous";
+            this.runPreviousToolStripMenuItem.Click += new System.EventHandler(this.OnRunPreviousClick);
+            // 
+            // runMRUToolStripMenuItem
+            // 
+            this.runMRUToolStripMenuItem.Name = "runMRUToolStripMenuItem";
+            this.runMRUToolStripMenuItem.Size = new System.Drawing.Size(460, 54);
+            this.runMRUToolStripMenuItem.Text = "Run MRU...";
+            this.runMRUToolStripMenuItem.Click += new System.EventHandler(this.OnRunMruClick);
+            // 
+            // runConfigurationsToolStripMenuItem
+            // 
+            this.runConfigurationsToolStripMenuItem.Name = "runConfigurationsToolStripMenuItem";
+            this.runConfigurationsToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.runConfigurationsToolStripMenuItem.Text = "Run Any...";
+            this.runConfigurationsToolStripMenuItem.Click += new System.EventHandler(this.OnRunConfigurationsClick);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(457, 6);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(104, 48);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.OnHelpAboutClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -201,12 +245,17 @@
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Button buttonQuit;
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Button buttonStart;
+        private System.Windows.Forms.ToolStripMenuItem runPreviousToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runMRUToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runConfigurationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 
