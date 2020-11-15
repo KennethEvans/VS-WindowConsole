@@ -64,6 +64,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Misc\MakeGridImage.cs" />
     <Compile Include="Misc\Test.cs" />
     <Compile Include="MultiChoiceListDialog.cs">
       <SubType>Form</SubType>

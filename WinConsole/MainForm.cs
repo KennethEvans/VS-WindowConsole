@@ -17,6 +17,7 @@ using System.Drawing;
 namespace WinConsole {
     public partial class MainForm : Form {
         public static readonly string NL = Environment.NewLine;
+        public static readonly string MISC_NAMESPACE = "WinConsole.Misc";
         public static readonly int N_MRU = 5;
 
         public string[] MruList { get; set; } = new string[N_MRU];
@@ -119,9 +120,13 @@ namespace WinConsole {
 
         private void run(string className) {
             try {
-                Assembly.GetExecutingAssembly().CreateInstance(className);
-                Test app = new Test();
-                app.Main(null);
+                Runnable runnable = (Runnable)Assembly.GetExecutingAssembly().
+                    CreateInstance(MISC_NAMESPACE + "." + className);
+                if (runnable == null) {
+                    Utils.errMsg("No Runnable found for " + className);
+                    return;
+                }
+                runnable.Main(null);
                 addToMruList(className);
             } catch (Exception ex) {
                 Utils.excMsg("Error running " + className, ex);
@@ -212,9 +217,8 @@ namespace WinConsole {
         }
 
         private void OnRunConfigurationsClick(object sender, EventArgs e) {
-            string nameSpace = "WinConsole.Misc";
             List<string> mruNames = Assembly.GetExecutingAssembly().GetTypes().
-                 Where(type => type.Namespace == nameSpace)
+                 Where(type => type.Namespace == MISC_NAMESPACE)
                 .Select(type => type.Name).ToList();
             if (mruNames == null || mruNames.Count() == 0) {
                 Utils.errMsg("Error finding runnable classes");
