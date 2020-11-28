@@ -13,6 +13,8 @@ using KEUtils.MultichoiceListDialog;
 using System.Linq;
 using KEUtils.About;
 using System.Drawing;
+using System.Diagnostics;
+using System.Threading;
 
 namespace WinConsole {
     public partial class MainForm : Form {
@@ -126,6 +128,7 @@ namespace WinConsole {
                     Utils.errMsg("No Runnable found for " + className);
                     return;
                 }
+                //Debug.WriteLine("run: thread=" + Thread.CurrentThread.ManagedThreadId);
                 runnable.Main(null);
                 addToMruList(className);
             } catch (Exception ex) {
@@ -150,7 +153,10 @@ namespace WinConsole {
                     MemoryStream.SetLength(0);
                 }
             }
-            if (!String.IsNullOrEmpty(msg)) textBox.AppendText(msg);
+            if (msg == null) return;
+            //Debug.WriteLine("OnTimerElapsed: thread=" + Thread.CurrentThread.ManagedThreadId);
+            // Run on UI thread
+            Invoke((MethodInvoker)delegate { textBox.AppendText(msg); });
         }
 
         private void OnExitClick(object sender, EventArgs e) {
