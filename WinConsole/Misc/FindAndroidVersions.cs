@@ -19,21 +19,37 @@ namespace WinConsole.Misc {
         private static void Search(string dir) {
             //Console.WriteLine("Processing directory " + dir);
             if (!Directory.Exists(dir)) return;
-            bool found;
+            // Check for project directory
+            bool projectDir = false;
+            // Look for .gradle
             foreach (String subdir in Directory.GetDirectories(dir)) {
-                //Console.WriteLine("Processing subdirectory " + subdir);
-                found = false;
-                if (Path.GetFileName(subdir).ToLower().Equals("app")) {
-                    foreach (String file in Directory.GetFiles(subdir)) {
-                        if (Path.GetFileName(file).Equals("build.gradle")) {
-                            Console.WriteLine("Processing file " + file);
-                            found = true;
-                            parseFile(file);
-                            break;
-                        }
+                if (Path.GetFileName(subdir).ToLower().Equals(".gradle")) {
+                    projectDir = true;
+                    break;
+                }
+            }
+            if (!projectDir) {
+                // Check for settings files
+                foreach (String file in Directory.GetFiles(dir)) {
+                    if (Path.GetFileName(file).ToLower().Equals("settings.gradle")) {
+                        projectDir = true;
+                        break;
                     }
                 }
-                if (!found) Search(subdir);
+            }
+            // If not a project directory look for build.gradle
+            if (!projectDir) {
+                foreach (String file in Directory.GetFiles(dir)) {
+                    if (Path.GetFileName(file).Equals("build.gradle")) {
+                        Console.WriteLine("Processing file " + file);
+                        parseFile(file);
+                        return;
+                    }
+                }
+            }
+            // Search the sub directories
+            foreach (String subdir in Directory.GetDirectories(dir)) {
+                Search(subdir);
             }
         }
 
@@ -50,7 +66,10 @@ namespace WinConsole.Misc {
             try {
                 appDir = Path.GetDirectoryName(fileName);
                 projDir = Path.GetDirectoryName(appDir);
-                projDir = projDir.Replace(PROJECTS_DIR, "");
+                int index = projDir.IndexOf(PROJECTS_DIR);
+                if (index > -1) {
+                    projDir = projDir.Substring(PROJECTS_DIR.Length);
+                }
                 foreach (string line in File.ReadAllLines(fileName)) {
                     tokens = Regex.Split(line.Trim(), @"\s+");
                     if (tokens.Length != 2) continue;
