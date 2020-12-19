@@ -120,6 +120,11 @@ namespace WinConsole.Misc {
                     && firstChild.nodeUuid.Length == 32
                     //&& firstChild.nodeName.Equals(TOOL_NAME)
                     ) {
+                    if (!firstChild.nodeName.Equals(TOOL_NAME)) {
+                        // Get the next tool item
+                        map.TryGetValue(firstChild.nodeNextUuid, out firstChild);
+                        continue;
+                    }
                     firstChild.nodeParentUuid = tool.nodeUuid;
 #if showProgress
                     // sb.AppendLine("Tool: " + firstChild.nodeName
@@ -135,6 +140,11 @@ namespace WinConsole.Misc {
                         && firstChild1.nodeUuid.Length == 32
                         //&& firstChild1.nodeName.Equals(groupName)
                         ) {
+                        if (!firstChild1.nodeName.Equals(GROUP_NAME)) {
+                            // Get the next tool item
+                            map.TryGetValue(firstChild1.nodeNextUuid, out firstChild1);
+                            continue;
+                        }
 #if showProgress
                         //Console.WriteLine(
                         // TAB + "Group: " + firstChild1.nodeName + " nodeUuid="
@@ -159,11 +169,8 @@ namespace WinConsole.Misc {
                             //Console.WriteLine(firstChild.nodeName.Equals(TOOL_NAME)
                             //    && firstChild1.nodeName.Equals(GROUP_NAME));
 #endif                            //nSubTools++;
-                            if (firstChild.nodeName.Equals(TOOL_NAME)
-                                && firstChild1.nodeName.Equals(GROUP_NAME)) {
-                                brush = new Brush(firstChild2.nodeName, firstChild2.nodeVariantID);
-                                brushes.Add(brush);
-                            }
+                            brush = new Brush(firstChild2.nodeName, firstChild2.nodeVariantID);
+                            brushes.Add(brush);
                             firstChild2.nodeParentUuid = firstChild1.nodeUuid;
                             // Get the next subtool item
                             map.TryGetValue(firstChild2.nodeNextUuid, out firstChild2);
