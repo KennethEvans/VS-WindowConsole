@@ -1,20 +1,18 @@
 ﻿//#define debugTimer
 
-using System;
-using System.IO;
-using System.Windows.Forms;
-using WinConsole.Misc;
-using System.Timers;
-using System.Reflection;
+using KEUtils.About;
+using KEUtils.MultichoiceListDialog;
 using KEUtils.Utils;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using KEUtils.MultichoiceListDialog;
-using System.Linq;
-using KEUtils.About;
 using System.Drawing;
-using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Threading;
+using System.Timers;
+using System.Windows.Forms;
 
 namespace WinConsole {
     public partial class MainForm : Form {
